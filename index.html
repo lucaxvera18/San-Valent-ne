@@ -24,7 +24,6 @@
             min-height: 100vh; 
             font-family: 'Montserrat', sans-serif; 
             overflow: hidden; 
-            touch-action: manipulation;
         }
 
         .magazine-canvas { 
@@ -36,8 +35,6 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.2); 
             display: flex; 
             flex-direction: column; 
-            border-left: 1px solid #f8bbd0;
-            border-right: 1px solid #f8bbd0;
         }
 
         .page { 
@@ -48,7 +45,6 @@
             text-align: center; 
             color: var(--pink-dark); 
             background: var(--pink-bg); 
-            overflow: hidden; 
             position: relative; 
         }
 
@@ -56,14 +52,13 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- P1: SOBRE CORREGIDO --- */
+        /* --- P1: SOBRE --- */
         .envelope-container { 
             position: relative; 
             width: 280px; 
             height: 200px; 
             margin: auto; 
             cursor: pointer; 
-            perspective: 1000px;
         }
 
         .envelope-back { 
@@ -84,10 +79,13 @@
             height: 160px; 
             background: white; 
             z-index: 2; 
-            transition: all 0.6s ease; 
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             padding: 20px; 
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             font-family: 'Dancing Script', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .envelope-front { 
@@ -112,18 +110,17 @@
             transition: transform 0.6s ease; 
         }
         
-        /* Animación de apertura */
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-container.open .paper-letter { transform: translateY(-100px); z-index: 3; }
+        .envelope-container.open .paper-letter { transform: translateY(-110px); z-index: 3; }
 
         /* --- P2: REVISTA --- */
         .mag-header { border-top: 1.5px solid var(--pink-dark); border-bottom: 1.5px solid var(--pink-dark); display: flex; justify-content: space-between; font-size: 8px; font-weight: bold; padding: 4px 0; margin-bottom: 10px; }
         .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 40px; margin: 5px 0; }
         .cursive-title { font-family: 'Dancing Script', cursive; font-size: 30px; margin: 10px 0; }
         .main-photo { width: 100%; border: 1px solid var(--pink-dark); padding: 5px; margin: 10px 0; }
-        .main-photo img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .main-photo img { width: 100%; height: 180px; object-fit: cover; display: block; border: 1px solid var(--pink-dark); }
         
-        .coupon { background: var(--red-main); color: white; padding: 8px; font-size: 8px; border: 1px dashed white; border-radius: 4px; animation: blink 1.5s infinite; flex: 1; }
+        .coupon { background: var(--red-main); color: white; padding: 10px; font-size: 8px; border: 1px dashed white; border-radius: 4px; animation: blink 1.5s infinite; flex: 1; display: flex; align-items: center; justify-content: center; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
         /* --- P3: CUADRICULADO --- */
@@ -135,14 +132,14 @@
             margin: 15px 0; 
             background: white;
         }
-        .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 5px; font-size: 10px; font-weight: 600; line-height: 1.1; }
+        .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: 600; line-height: 1.2; }
         .cell-heart { font-size: 30px; color: var(--red-main); }
 
-        /* --- P4: PREGUNTA --- */
+        /* --- PLUMAS --- */
         .feather { position: absolute; top: -50px; font-size: 25px; pointer-events: none; animation: fall-feather linear forwards; z-index: 0; }
         @keyframes fall-feather { to { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; } }
 
-        /* --- P5: CORAZÓN ENCAJE --- */
+        /* --- P5: FINAL --- */
         .final-page { background: var(--red-main); color: white; justify-content: center; }
         .doily-heart { 
             width: 300px; height: 280px; background-color: white; margin: auto; position: relative; 
@@ -150,11 +147,11 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); 
         }
         .doily-heart::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 3px dotted var(--pink-medium); clip-path: inherit; }
-        .medallion { width: 50px; height: 50px; background: linear-gradient(145deg, #ffd700, #d4af37); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--red-main); font-weight: 900; font-size: 20px; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .medallion { width: 55px; height: 55px; background: linear-gradient(145deg, #ffd700, #d4af37); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--red-main); font-weight: 900; font-size: 22px; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
-        .nav-btns { margin-top: auto; padding-bottom: 20px; display: flex; justify-content: space-around; width: 100%; }
-        .btn-p { background: white; border: 1px solid var(--pink-dark); padding: 8px 15px; font-size: 10px; font-weight: bold; cursor: pointer; }
-        .btn-ans { background: white; border: 2px solid var(--pink-dark); padding: 12px; border-radius: 25px; width: 85%; margin: 8px auto; font-weight: bold; color: var(--pink-dark); cursor: pointer; position: relative; z-index: 10; }
+        .nav-btns { margin-top: auto; padding-bottom: 20px; display: flex; justify-content: space-around; }
+        .btn-p { background: white; border: 1px solid var(--pink-dark); padding: 8px 15px; font-size: 10px; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .btn-ans { background: white; border: 2px solid var(--pink-dark); padding: 15px; border-radius: 30px; width: 85%; margin: 10px auto; font-weight: bold; color: var(--pink-dark); cursor: pointer; position: relative; z-index: 10; }
     </style>
 </head>
 <body>
@@ -165,14 +162,14 @@
             <div class="envelope-container" id="envelope" onclick="openEnvelope()">
                 <div class="envelope-flap"></div>
                 <div class="paper-letter">
-                    <p style="margin: 0; font-size: 16px;">Para: Rosario</p>
-                    <p style="font-size: 12px; margin-top: 10px;">Tengo una sorpresa para vos... <br> <b>Tocá el sobre</b> ❤️</p>
-                    <p style="font-size: 9px; margin-top: 20px; text-align: right;">De: Luca</p>
+                    <p style="margin: 0; font-size: 20px;">Para: Rosario</p>
+                    <p style="font-size: 14px; margin-top: 10px;">Tengo algo especial para vos... ❤️</p>
+                    <p style="font-size: 11px; margin-top: 20px; text-align: right;">De: Luca</p>
                 </div>
                 <div class="envelope-back"></div>
                 <div class="envelope-front"></div>
             </div>
-            <button class="btn-p" id="btn-next-envelope" style="display:none; margin-top: 20px;" onclick="nav(2)">ENTRAR</button>
+            <p id="hint" style="font-size: 12px; margin-top: 20px; color: var(--pink-dark); font-weight: bold;">Tocá el sobre para abrirlo</p>
         </section>
 
         <section class="page" id="p2">
@@ -180,11 +177,11 @@
             <h1 class="v-edition">Valentine Edition</h1>
             <div class="mag-header" style="border-style: solid;"><span>14 DE FEBRERO</span><span>ME GUSTÁS MUCHO</span><span>SIEMPRE JUNTOS</span></div>
             <h2 class="cursive-title">Will you be my Valentine?</h2>
-            <div class="main-photo"><img src="foto1.jpg" onerror="this.src='https://via.placeholder.com/400x180?text=Tu+Foto+Aque'"></div>
-            <div style="font-size: 11px; text-align: justify; line-height: 1.4;">
-                <strong>Diario de amor.</strong> Después de que el mundo hiciera su magia, me quedó claro algo: quiero vivir este 14 de febrero con vos.
+            <div class="main-photo"><img src="foto1.jpg"></div>
+            <div style="font-size: 11px; text-align: justify; line-height: 1.4; padding: 0 5px;">
+                <strong>Diario de amor.</strong> Después de que el mundo hiciera su magia y los caminos se cruzaran, me quedó claro algo: quiero vivir este 14 de febrero con vos.
             </div>
-            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 10px;">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
                 <div class="coupon">CUPÓN PARA:<br>Noche de películas</div>
                 <div class="coupon">CUPÓN PARA:<br>Noche de chicas</div>
             </div>
@@ -207,6 +204,7 @@
                 <div class="cell cell-heart">❤️</div>
                 <div class="cell"><strong>5</strong> No imagino a nadie más a mi lado.</div>
             </div>
+            <div style="background: var(--red-main); color: white; padding: 10px; font-size: 10px; font-weight: bold;">SEÑALES DE QUE DEBÉS DECIR "SÍ"</div>
             <div class="nav-btns">
                 <button class="btn-p" onclick="nav(2)">ANTERIOR</button>
                 <button class="btn-p" onclick="nav(4)">SIGUIENTE</button>
@@ -215,32 +213,36 @@
 
         <section class="page" id="p4" style="justify-content: center;">
             <div id="feather-container" style="position: absolute; inset: 0; pointer-events: none;"></div>
-            <h1 style="font-family: 'Playfair Display'; font-size: 24px;">La gran pregunta</h1>
-            <p style="font-size: 12px; margin: 10px 0;">Después de comprobar la química innegable entre nosotros...</p>
-            <h2 class="cursive-title" style="font-size: 35px;">¿Querés ser mi San Valentín?</h2>
+            <h1 style="font-family: 'Playfair Display'; font-size: 26px;">La gran pregunta</h1>
+            <p style="font-size: 13px; margin: 15px 0;">Después de comprobar la química innegable entre nosotros...</p>
+            <h2 class="cursive-title" style="font-size: 40px;">¿Querés ser mi San Valentín?</h2>
             <button class="btn-ans" onclick="finish()">OBVIO, LO ESTABA ESPERANDO</button>
             <button class="btn-ans" onclick="finish()">¡SI! POR SUPUESTOOO</button>
         </section>
 
         <section class="page final-page" id="p5">
-            <h1 style="font-size: 20px; margin-bottom: 20px;">Confirmado oficialmente:</h1>
+            <h1 style="font-size: 22px; margin-bottom: 20px;">Confirmado oficialmente:</h1>
             <div class="doily-heart">
-                <p style="font-family: 'Dancing Script', cursive; font-size: 28px; margin: 0;">Sos mi San Valentín.</p>
-                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0; z-index: 2;">Sos mi San Valentín.</p>
+                <div style="display: flex; gap: 15px; margin-top: 20px; z-index: 2;">
                     <div class="medallion">L</div>
                     <div class="medallion">R</div>
                 </div>
             </div>
-            <p style="margin-top: 20px; font-size: 11px;">Gracias por decir que sí. Luca.</p>
+            <p style="margin-top: 30px; font-size: 12px;">Gracias por decir que sí.<br>Luca.</p>
         </section>
     </div>
 
     <script>
         function openEnvelope() {
-            document.getElementById('envelope').classList.add('open');
-            setTimeout(() => {
-                document.getElementById('btn-next-envelope').style.display = 'block';
-            }, 600);
+            const env = document.getElementById('envelope');
+            if(!env.classList.contains('open')) {
+                env.classList.add('open');
+                document.getElementById('hint').innerText = "Abriendo sorpresa...";
+                setTimeout(() => {
+                    nav(2);
+                }, 1800); // Tiempo para que vea la carta subir antes de cambiar
+            }
         }
 
         function nav(n) {
