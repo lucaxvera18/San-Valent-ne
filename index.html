@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Rosario ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --rosa-fuerte: #d81b60;
-            --rosa-claro: #fce4ec;
-            --rosa-medio: #f06292;
-            --blanco: #ffffff;
+            --pink-bg: #fdf0f5;
+            --magazine-pink: #ff85a1;
+            --dark-pink: #d81b60;
+            --text-gray: #4a4a4a;
         }
 
         body {
-            background-color: #ffebee;
-            font-family: 'Georgia', serif;
+            background-color: #fce4ec;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -23,183 +24,174 @@
             overflow: hidden;
         }
 
-        /* Contenedor tipo Revista */
-        .magazine-container {
-            background-color: var(--blanco);
-            width: 90vw;
-            max-width: 380px;
-            height: 85vh;
-            border: 6px solid var(--rosa-medio);
-            border-radius: 20px;
+        .magazine-canvas {
+            background-color: var(--pink-bg);
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
+            border: 1px solid #f8bbd0;
         }
 
         .page {
             display: none;
-            padding: 30px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            padding: 20px;
             height: 100%;
+            flex-direction: column;
             box-sizing: border-box;
-            animation: fadeIn 0.6s ease;
+            animation: fadeIn 0.8s ease;
         }
 
         .active { display: flex; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Elementos de Diseño */
-        h1 { color: var(--rosa-fuerte); margin: 10px 0; font-size: 1.8rem; }
-        p { color: #444; line-height: 1.5; font-size: 1rem; }
+        /* Estilos Página 1: Sobre */
+        .envelope-page { justify-content: center; align-items: center; background: #fff5f8; }
+        .envelope { width: 280px; position: relative; cursor: pointer; transition: transform 0.3s; }
+        .envelope:hover { transform: scale(1.05); }
 
-        .header-line {
-            border-top: 2px solid var(--rosa-medio);
-            border-bottom: 2px solid var(--rosa-medio);
-            padding: 10px 0;
-            width: 100%;
-            margin: 15px 0;
-        }
+        /* Estilos Página 2: Revista */
+        .mag-header { border-top: 2px solid var(--dark-pink); border-bottom: 2px solid var(--dark-pink); text-align: center; padding: 5px 0; margin-top: 10px; }
+        .mag-header span { font-size: 10px; letter-spacing: 2px; color: var(--dark-pink); font-weight: bold; }
+        .valentine-title { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--dark-pink); margin: 10px 0; font-style: italic; }
+        .will-you { font-family: 'Dancing Script', cursive; font-size: 32px; color: var(--dark-pink); text-align: center; margin: 20px 0; }
+        .article-text { font-size: 13px; line-height: 1.6; color: var(--text-gray); text-align: justify; columns: 2; column-gap: 15px; }
+        .photo-main { width: 100%; height: 220px; background: #eee; margin: 10px 0; border: 1px solid #fce4ec; overflow: hidden; }
+        .photo-main img { width: 100%; height: 100%; object-fit: cover; }
+        .coupons { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        .coupon { background: #ff4d6d; color: white; padding: 5px 10px; font-size: 9px; border: 1px dashed white; }
 
-        .photo-frame {
-            width: 100%;
-            height: 200px;
-            background: var(--rosa-claro);
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
-            border: 1px solid var(--rosa-medio);
-        }
+        /* Estilos Página 3: 5 Razones */
+        .reasons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .reason-box { border: 1px solid var(--magazine-pink); padding: 10px; font-size: 11px; position: relative; min-height: 80px; }
+        .heart-icon { color: var(--dark-pink); font-size: 20px; margin: 5px; }
 
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        /* Estilos Página 4: Pregunta */
+        .big-question { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--dark-pink); margin-top: 40px; }
+        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 50px; width: 100%; align-items: center; }
+        .btn-resp { background: white; border: 2px solid var(--dark-pink); color: var(--dark-pink); padding: 12px 30px; border-radius: 25px; font-weight: bold; width: 80%; cursor: pointer; transition: 0.3s; }
+        .btn-resp:hover { background: var(--dark-pink); color: white; }
 
-        /* Botones */
-        .btn {
-            background-color: var(--rosa-medio);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            text-decoration: none;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(240, 98, 146, 0.4);
-        }
+        /* Estilos Página 5: Final */
+        .final-page { background: #ff4d6d; color: white; justify-content: center; align-items: center; }
+        .final-heart { background: white; width: 300px; height: 300px; clip-path: path('M150 50 C150 20 100 20 100 50 C100 80 150 110 150 110 C150 110 200 80 200 50 C200 20 150 20 150 50'); } /* Simplificado para demo */
+        .locket { font-size: 40px; margin-top: 20px; }
 
-        .btn:hover { background-color: var(--rosa-fuerte); transform: translateY(-2px); }
-
-        /* Razones */
-        .reasons { text-align: left; width: 100%; }
-        .reason-item { margin: 8px 0; color: var(--rosa-fuerte); font-weight: bold; }
-
-        /* Animación Corazones */
-        .heart {
-            position: fixed;
-            top: -20px;
-            font-size: 20px;
-            z-index: 1000;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
+        /* Navegación */
+        .nav-buttons { position: absolute; bottom: 20px; width: 100%; display: flex; justify-content: space-around; }
+        .btn-nav { background: #fff; border: 1px solid #ddd; padding: 5px 15px; font-size: 10px; text-transform: uppercase; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="magazine-container">
+    <div class="magazine-canvas">
         
-        <section class="page active" id="p1">
-            <span style="font-size: 50px;">✉️</span>
-            <h1>Para: Rosario</h1>
-            <p>Tienes un nuevo mensaje privado.</p>
-            <button class="btn" onclick="nextPage(2)">Abrir mensaje ✨</button>
+        <section class="page active envelope-page" id="p1">
+            <div class="envelope" onclick="nextPage(2)">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062630.png" width="200">
+                <p style="font-family: 'Dancing Script'; font-size: 20px;">De: Luca | Para: Rosario</p>
+                <p style="font-size: 12px; color: #888;">Toca el corazón para abrir</p>
+            </div>
         </section>
 
         <section class="page" id="p2">
-            <small style="letter-spacing: 2px; color: var(--rosa-medio);">EDICIÓN ESPECIAL</small>
-            <div class="header-line">
-                <h1>VALENTINE EDITION</h1>
+            <div class="mag-header">
+                <span>EDICIÓN ESPECIAL | FEBRERO 2026 | JUNTOS POR SIEMPRE</span>
             </div>
-            <div class="photo-frame">
-                <img src="foto1.jpg" alt="Foto 1">
+            <h1 class="valentine-title">Valentine Edition</h1>
+            <h2 class="will-you">Will you be my Valentine?</h2>
+            <p style="font-size: 10px; text-align: center; color: var(--dark-pink);">DISTRIBUCIÓN EXCLUSIVA PARA: ROSARIO</p>
+            
+            <div class="photo-main">
+                <img src="foto1.jpg" alt="Foto Portada">
             </div>
-            <p><i>"Después de que el mundo hiciera su magia, supe que eras tú."</i></p>
-            <button class="btn" onclick="nextPage(3)">Siguiente →</button>
+
+            <div class="article-text">
+                Diario de amor. Después de que el mundo hiciera su magia y los caminos se cruzaran, quedó claro algo: quiero vivir este 14 de febrero contigo. Mi corazón lo tiene claro desde hace tiempo. Quiero un San Valentín a tu lado, lleno de amor y risas.
+            </div>
+
+            <div class="coupons">
+                <div class="coupon">CUPÓN: CITA SORPRESA</div>
+                <div class="coupon">CUPÓN: IDA AL CINE</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-nav" onclick="nextPage(3)">PAG. SIGUIENTE</button>
+            </div>
         </section>
 
         <section class="page" id="p3">
-            <h3>5 Razones por las que eres mi elección perfecta:</h3>
-            <div class="reasons">
-                <div class="reason-item">❤️ Tu sonrisa única.</div>
-                <div class="reason-item">❤️ Cómo me haces reír.</div>
-                <div class="reason-item">❤️ Tu forma de ver la vida.</div>
-                <div class="reason-item">❤️ Eres mi mejor compañía.</div>
-                <div class="reason-item">❤️ Eres simplemente tú.</div>
+            <h1 class="valentine-title" style="font-size: 28px;">05 Razones por las que eres mi elección perfecta</h1>
+            <div class="reasons-grid">
+                <div class="reason-box"><strong>1</strong> Tienes la sonrisa más linda del universo.</div>
+                <div class="reason-box"><span class="heart-icon">❤️</span></div>
+                <div class="reason-box"><span class="heart-icon">❤️</span></div>
+                <div class="reason-box"><strong>2</strong> Haces que mi corazón lata más rápido al verte.</div>
+                <div class="reason-box"><strong>4</strong> Eres mi persona favorita para compartir.</div>
+                <div class="reason-box"><strong>5</strong> No imagino a nadie más a mi lado.</div>
             </div>
-            <div class="photo-frame" style="height: 120px;">
-                <img src="foto2.jpg" alt="Foto 2">
+            <div class="nav-buttons">
+                <button class="btn-nav" onclick="nextPage(2)">ANTERIOR</button>
+                <button class="btn-nav" onclick="nextPage(4)">SIGUIENTE</button>
             </div>
-            <button class="btn" onclick="nextPage(4)">Seguir leyendo</button>
         </section>
 
         <section class="page" id="p4">
-            <h1>La gran pregunta...</h1>
-            <p>¿Quieres ser mi San Valentín este 14 de Febrero?</p>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="celebrate()">¡SÍ! 😍</button>
-                <button class="btn" onclick="celebrate()">¡OBVIO! ❤️</button>
+            <h1 class="big-question">La gran pregunta</h1>
+            <p style="font-size: 14px;">Después de recopilar datos y comprobar la química innegable entre nosotros...</p>
+            <p style="font-family: 'Dancing Script'; font-size: 32px; color: var(--dark-pink);">¿Quieres ser mi San Valentín?</p>
+            
+            <div class="btn-group">
+                <button class="btn-resp" onclick="celebrate()">OBVIO, LO ESTABA ESPERANDO</button>
+                <button class="btn-resp" onclick="celebrate()">¡SI! POR SUPUESTOOO</button>
             </div>
         </section>
 
-        <section class="page" id="p5">
-            <h1 style="font-size: 3rem;">💖</h1>
-            <h1>¡CONFIRMADO!</h1>
-            <p>Eres oficialmente mi San Valentín.</p>
-            <div class="photo-frame">
-                <img src="foto3.jpg" alt="Foto 3">
+        <section class="page final-page" id="p5">
+            <h1 style="font-family: 'Playfair Display';">Confirmado oficialmente:</h1>
+            <div style="background: white; padding: 40px; border-radius: 50%; color: var(--dark-pink); text-align: center;">
+                <p style="font-family: 'Dancing Script'; font-size: 30px;">Eres mi San Valentín</p>
+                <div class="locket">🏅 L + R</div>
             </div>
-            <p>Gracias por estar en mi vida.<br><b>Con amor, Luca</b></p>
+            <p style="font-size: 12px; margin-top: 20px; text-align: center;">Gracias por decir que sí.<br>Prepárate para un día bonito,<br>Luca.</p>
         </section>
 
     </div>
 
     <script>
-        function nextPage(n) {
+        function nextPage(num) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('p' + n).classList.add('active');
+            document.getElementById('p' + num).classList.add('active');
         }
 
         function celebrate() {
             nextPage(5);
-            setInterval(createHeart, 300);
+            // Efecto de corazones cayendo (opcional pero recomendado)
+            for(let i=0; i<50; i++) {
+                createHeart();
+            }
         }
 
         function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
-            const emojis = ['❤️', '💖', '💕', '🌸'];
-            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.top = '-20px';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
+
+        // Definición de animación para corazones
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
