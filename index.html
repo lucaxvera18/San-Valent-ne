@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Rosario ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="phone-canvas">
+        <section class="page active" id="p1">
+            <div class="icon">✉️</div>
+            <h1>Hola, Rosario</h1>
+            <p>Te envié algo especial... ¿Quieres verlo?</p>
+            <button class="btn-next" onclick="nextPage(2)">Abrir Regalo ✨</button>
+        </section>
+
+        <section class="page" id="p2">
+            <small class="date-tag">FEBRERO 2026</small>
+            <h1 class="magazine-title">VALENTINE EDITION</h1>
+            <div class="photo-slot">
+                <img src="foto1.jpg" alt="Nuestra Foto">
+            </div>
+            <p class="featured-text"><strong>Para: Rosario</strong></p>
+            <p>Un detalle exclusivo para la persona más especial.</p>
+            <button class="btn-next" onclick="nextPage(3)">Siguiente →</button>
+        </section>
+
+        <section class="page" id="p3">
+            <h3>5 Razones por las que eres perfecta</h3>
+            <div class="reasons-list">
+                <p><span>1.</span> Tu sonrisa ilumina todo.</p>
+                <p><span>2.</span> Haces que todo sea mejor.</p>
+                <p><span>3.</span> Tu risa es mi sonido favorito.</p>
+                <p><span>4.</span> Eres mi lugar seguro.</p>
+                <p><span>5.</span> Por cómo me haces sentir.</p>
+            </div>
+            <div class="photo-slot small-photo">
+                <img src="foto2.jpg" alt="Foto 2">
+            </div>
+            <button class="btn-next" onclick="nextPage(4)">Continuar</button>
+        </section>
+
+        <section class="page" id="p4">
+            <h1>La gran pregunta...</h1>
+            <p>¿Quieres ser mi San Valentín este 14 de Febrero?</p>
+            <div class="btn-group">
+                <button class="btn-next pulse" onclick="celebrate()">¡SÍ, OBVIO! ❤️</button>
+                <button class="btn-next pulse" onclick="celebrate()">¡SÍ! 😍</button>
+            </div>
+        </section>
+
+        <section class="page" id="p5">
+            <h1 class="final-emoji">💖</h1>
+            <h1>¡OFICIAL!</h1>
+            <p>Eres mi San Valentín</p>
+            <div class="photo-slot">
+                <img src="foto3.jpg" alt="Foto Final">
+            </div>
+            <p class="signature">Gracias por decir que sí.<br>Con amor, Luca</p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
