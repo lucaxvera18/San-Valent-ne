@@ -7,11 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,900&family=Montserrat:wght@300;400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-light: #fdf0f5;
+            --pink-bg: #fdf0f5;
             --pink-medium: #ff85a1;
             --pink-dark: #d81b60;
-            --red-coupon: #e63946;
-            --gold: #d4af37;
+            --red-main: #e63946;
         }
 
         body {
@@ -26,16 +25,15 @@
         }
 
         .magazine-canvas {
-            background-color: var(--pink-light);
+            background-color: var(--pink-bg);
             width: 100%;
             max-width: 400px;
             height: 100vh;
             position: relative;
             box-shadow: 0 0 40px rgba(0,0,0,0.2);
-            border: 2px solid #f8bbd0;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            border: 1px solid #f8bbd0;
         }
 
         .page {
@@ -46,129 +44,132 @@
             box-sizing: border-box;
             text-align: center;
             color: var(--pink-dark);
-            background: var(--pink-light);
+            background: var(--pink-bg);
+            overflow-y: auto;
         }
 
-        .active { display: flex; animation: pageTransition 0.8s ease-in-out; }
+        .active { display: flex; animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes pageTransition {
-            from { opacity: 0; transform: scale(1.05); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- PÁGINA 1: SOBRE REALISTA --- */
+        /* P1: SOBRE REALISTA */
         .envelope-wrapper {
             position: relative;
-            width: 300px;
-            height: 200px;
+            width: 280px;
+            height: 180px;
             background: #ffc1d1;
             margin: auto;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .envelope-flap {
+        .flap {
             position: absolute;
-            top: 0;
-            width: 0; height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
+            top: 0; width: 0; height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
             border-top: 100px solid #ffb1c1;
-            z-index: 2;
-            transition: transform 0.6s ease;
+            z-index: 3;
             transform-origin: top;
+            transition: transform 0.6s;
         }
 
-        .envelope-wrapper:hover .envelope-flap {
-            transform: rotateX(180deg);
-        }
+        .envelope-wrapper:hover .flap { transform: rotateX(180deg); z-index: 1; }
 
-        .letter-content {
+        .letter {
             position: absolute;
-            bottom: 10px;
-            left: 5%;
-            width: 90%;
-            height: 80%;
+            bottom: 10px; left: 10px;
+            width: 260px; height: 140px;
             background: white;
-            z-index: 1;
-            padding: 10px;
+            z-index: 2;
+            padding: 15px;
             box-sizing: border-box;
             font-family: 'Dancing Script', cursive;
             transition: transform 0.6s;
         }
 
-        .envelope-wrapper:hover .letter-content {
-            transform: translateY(-50px);
-        }
+        .envelope-wrapper:hover .letter { transform: translateY(-40px); }
 
-        /* --- PÁGINA 2: DIARIO DETALLADO --- */
-        .mag-line { border-top: 2px double var(--pink-dark); border-bottom: 2px double var(--pink-dark); padding: 5px 0; margin: 10px 0; font-size: 9px; font-weight: 700; letter-spacing: 1px; }
-        .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 48px; margin: 0; }
-        .main-img-box { width: 100%; border: 3px solid var(--pink-dark); position: relative; padding: 5px; box-sizing: border-box; }
-        .main-img-box img { width: 100%; height: 200px; object-fit: cover; }
+        /* P2: DIARIO ESTILO REVISTA */
+        .mag-header { border-top: 1.5px solid var(--pink-dark); border-bottom: 1.5px solid var(--pink-dark); display: flex; justify-content: space-between; font-size: 8px; font-weight: bold; padding: 4px 0; margin-bottom: 10px; }
+        .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 42px; margin: 5px 0; }
+        .cursive-title { font-family: 'Dancing Script', cursive; font-size: 32px; margin: 10px 0; }
+        .main-photo { width: 100%; border: 1px solid var(--pink-dark); padding: 5px; box-sizing: border-box; margin: 10px 0; }
+        .main-photo img { width: 100%; height: 180px; object-fit: cover; }
         
-        /* Cupones Titilantes */
-        .coupon-box {
-            background: var(--red-coupon);
+        .coupon {
+            background: var(--red-main);
             color: white;
-            padding: 10px;
-            border: 2px dashed white;
-            font-size: 9px;
-            animation: pulseGlow 1.5s infinite;
+            padding: 8px;
+            font-size: 8px;
+            border: 1px dashed white;
+            border-radius: 4px;
+            animation: blink 1.5s infinite;
         }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; transform: scale(0.98); } }
 
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0px var(--red-coupon); transform: scale(1); }
-            50% { box-shadow: 0 0 15px var(--red-coupon); transform: scale(1.02); }
-            100% { box-shadow: 0 0 0px var(--red-coupon); transform: scale(1); }
-        }
-
-        /* --- PÁGINA 3: CUADRICULADO DIARIO --- */
+        /* P3: CUADRICULADO GRANDE (Fiel a la foto) */
         .reason-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            border: 2px solid var(--pink-dark);
-            background-image: radial-gradient(var(--pink-medium) 1px, transparent 1px);
-            background-size: 20px 20px;
-            margin: 20px 0;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            grid-template-rows: repeat(3, 110px);
+            border: 1.5px solid var(--pink-dark);
+            margin: 15px 0;
+            background-color: white;
         }
-        .cell { padding: 15px; border: 1px solid var(--pink-dark); font-size: 11px; font-weight: bold; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+        .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 10px; font-size: 11px; line-height: 1.3; font-weight: 600; }
+        .cell-heart { font-size: 40px; color: var(--red-main); }
 
-        /* --- PÁGINA 5: FINAL PREMIUM --- */
-        .final-bg { background-color: var(--red-coupon); }
-        .lace-heart-container {
-            width: 280px; height: 280px;
-            background: white;
+        /* P5: FINAL - CORAZÓN CON ENCAJE (DOILY) */
+        .final-page { background: var(--red-main); color: white; justify-content: center; }
+        
+        .doily-heart {
+            width: 320px;
+            height: 300px;
+            background-color: white;
             margin: auto;
-            clip-path: path('M140 20C140 20 140 0 100 0C60 0 20 40 20 80C20 120 140 220 140 220C140 220 260 120 260 80C260 40 220 0 180 0C140 0 140 20 140 20Z');
+            position: relative;
+            /* Forma de corazón con clip-path */
+            clip-path: path('M160 280 C160 280 20 200 20 110 C20 40 90 20 160 100 C230 20 300 40 300 110 C300 200 160 280 160 280');
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 10px double var(--red-coupon);
+            color: var(--pink-dark);
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
 
-        .medallion-box { display: flex; gap: 15px; margin-top: 10px; }
+        /* Borde de encaje simulado */
+        .doily-heart::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 4px dotted var(--pink-medium);
+            clip-path: inherit;
+        }
+
+        .doily-text { font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0; z-index: 2; }
+        
+        .medallions { display: flex; gap: 15px; margin-top: 20px; z-index: 2; }
         .medallion {
-            width: 50px; height: 50px;
-            background: linear-gradient(145deg, #ffd700, #b8860b);
+            width: 55px; height: 55px;
+            background: linear-gradient(145deg, #ffd700, #d4af37);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: var(--red-main);
             font-weight: 900;
-            font-size: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 22px;
             border: 2px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        .nav-footer { margin-top: auto; padding: 20px; display: flex; justify-content: space-between; }
-        .btn-mag { background: white; border: 1px solid var(--pink-dark); padding: 5px 15px; font-size: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
-        .btn-ask { background: white; color: var(--pink-dark); border: 2px solid var(--pink-dark); padding: 15px; border-radius: 30px; margin: 10px 0; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-ask:hover { background: var(--pink-dark); color: white; }
+        /* NAVEGACIÓN */
+        .nav-btns { margin-top: auto; padding-bottom: 20px; display: flex; justify-content: space-around; }
+        .btn-p { background: white; border: 1px solid var(--pink-dark); padding: 8px 15px; font-size: 10px; font-weight: bold; cursor: pointer; }
+        .btn-ans { background: white; border: 2px solid var(--pink-dark); padding: 15px; border-radius: 30px; width: 85%; margin: 10px auto; font-weight: bold; color: var(--pink-dark); cursor: pointer; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -176,120 +177,104 @@
     <div class="magazine-canvas">
         
         <section class="page active" id="p1" style="justify-content: center;">
-            <div class="envelope-wrapper" onclick="go(2)">
-                <div class="envelope-flap"></div>
-                <div class="letter-content">
-                    <p>Para: Rosario</p>
-                    <p style="font-size: 14px;">Tengo algo especial para ti... <br> Toca para abrir ❤️</p>
+            <div class="envelope-wrapper" onclick="nav(2)">
+                <div class="flap"></div>
+                <div class="letter">
+                    <p style="margin: 0;">Te tengo una sorpresa.</p>
+                    <p style="font-size: 11px;">Para descubrirla da click aquí ❤️</p>
+                    <p style="font-size: 10px; margin-top: 25px; text-align: right;">De: Luca</p>
                 </div>
-                <div style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 10px;">De: Luca</div>
+                <div style="position: absolute; bottom: 10px; right: 10px; color: white; font-size: 9px; z-index: 4;">Para: Rosario</div>
             </div>
         </section>
 
         <section class="page" id="p2">
-            <div class="mag-line">
-                <span>EDICIÓN ESPECIAL</span>
-                <span>LUCA & ROSARIO</span>
-                <span>2026</span>
-            </div>
+            <div class="mag-header"><span>EDICIÓN ESPECIAL</span><span>AIREK_DESIGN</span><span>FEBRERO 2026</span></div>
             <h1 class="v-edition">Valentine Edition</h1>
-            <div class="mag-line" style="border-style: solid; font-size: 7px;">
-                <span>14 FEBRERO</span>
-                <span>ME GUSTAS MUCHO</span>
-                <span>SIEMPRE JUNTOS</span>
+            <div class="mag-header" style="border-style: solid;"><span>14 DE FEBRERO DEL 2026</span><span>ME GUSTAS MUCHO</span><span>JUNTOS POR SIEMPRE</span></div>
+            <h2 class="cursive-title">Will you be my Valentine?</h2>
+            <div class="main-photo"><img src="foto1.jpg"></div>
+            <div style="font-size: 11px; text-align: justify; line-height: 1.4; padding: 0 5px;">
+                <strong>Diario de amor.</strong> Después de que el mundo hiciera su magia y los caminos se cruzaran, quedó claro algo: quiero vivir este 14 de febrero contigo.
             </div>
-            
-            <h2 style="font-family: 'Dancing Script'; font-size: 32px; margin: 10px 0;">Will you be my Valentine?</h2>
-            
-            <div class="main-img-box">
-                <img src="foto1.jpg" alt="Portada">
-                <div style="position: absolute; bottom: 10px; right: 10px; background: white; padding: 5px; font-size: 8px;">love' . ♡</div>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                <div class="coupon">CUPÓN PARA:<br>Una cita sorpresa</div>
+                <div class="coupon">CUPÓN PARA:<br>Una ida al cine</div>
             </div>
-
-            <p style="font-size: 11px; text-align: justify; columns: 2; column-gap: 10px; margin-top: 10px;">
-                <strong>Diario de amor.</strong> Después de que el mundo hiciera su magia, supe que quería este San Valentín contigo. Mi corazón no tiene dudas...
-            </p>
-
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <div class="coupon-box">CUPÓN: CITA SORPRESA</div>
-                <div class="coupon-box">CUPÓN: CINE & MÁS</div>
-            </div>
-
-            <div class="nav-footer">
-                <button class="btn-mag" onclick="go(1)">Anterior</button>
-                <button class="btn-mag" onclick="go(3)">Siguiente</button>
+            <div class="nav-btns">
+                <button class="btn-p" onclick="nav(1)">PAG. ANTERIOR</button>
+                <button class="btn-p" onclick="nav(3)">PAG. SIGUIENTE</button>
             </div>
         </section>
 
         <section class="page" id="p3">
-            <h2 style="font-family: 'Playfair Display'; font-style: italic;">05 Razones por las que eres Mi elección Perfecta</h2>
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 20px; margin-bottom: 5px;">05 Razones por las que eres Mi elección Perfecta</h2>
             <div class="reason-grid">
-                <div class="cell"><strong>1</strong> Tu sonrisa es el sol de mis días.</div>
-                <div class="cell">❤️</div>
-                <div class="cell">❤️</div>
-                <div class="cell"><strong>2</strong> Tu forma de quererme es única.</div>
-                <div class="cell"><strong>3</strong> Cada momento contigo vale oro.</div>
-                <div class="cell">❤️</div>
-                <div class="cell">❤️</div>
-                <div class="cell"><strong>4</strong> Eres mi lugar favorito.</div>
+                <div class="cell"><strong>1</strong> Tienes la sonrisa más linda del universo.</div>
+                <div class="cell cell-heart">❤️</div>
+                <div class="cell"><strong>3</strong> Contigo, cualquier día se siente especial.</div>
+                <div class="cell cell-heart">❤️</div>
+                <div class="cell"><strong>2</strong> Haces que mi corazón lata más rápido cada vez.</div>
+                <div class="cell cell-heart">❤️</div>
+                <div class="cell"><strong>4</strong> Eres mi persona favorita para compartir.</div>
+                <div class="cell cell-heart">❤️</div>
+                <div class="cell"><strong>5</strong> No imagino a nadie más a mi lado en este San Valentín.</div>
             </div>
-            <div style="background: var(--red-coupon); color: white; font-size: 10px; padding: 10px;">
-                ESTUDIOS CONFIRMAN: Eres la persona más increíble.
-            </div>
-            <div class="nav-footer">
-                <button class="btn-mag" onclick="go(2)">Anterior</button>
-                <button class="btn-mag" onclick="go(4)">Siguiente</button>
+            <div style="background: var(--red-main); color: white; padding: 10px; font-size: 10px; font-weight: bold;">SEÑALES DE QUE DEBES DECIR "SÍ"</div>
+            <div class="nav-btns">
+                <button class="btn-p" onclick="nav(2)">PAG. ANTERIOR</button>
+                <button class="btn-p" onclick="nav(4)">PAG. SIGUIENTE</button>
             </div>
         </section>
 
         <section class="page" id="p4" style="justify-content: center;">
-            <h1 style="font-family: 'Playfair Display';">La gran pregunta...</h1>
-            <p>Con el corazón en la mano y una sonrisa nerviosa:</p>
-            <h2 style="font-family: 'Dancing Script'; font-size: 40px;">¿Quieres ser mi San Valentín?</h2>
-            <button class="btn-ask" onclick="startFinal()">¡OBVIO, LO ESPERABA! 😍</button>
-            <button class="btn-ask" onclick="startFinal()">¡SÍ, POR SUPUESTOOO! ❤️</button>
+            <h1 style="font-family: 'Playfair Display'; font-size: 26px;">La gran pregunta</h1>
+            <p style="font-size: 12px; margin: 15px 0;">Después de analizar los hechos y comprobar la química innegable entre nosotros...</p>
+            <h2 class="cursive-title" style="font-size: 40px;">¿Quieres ser mi San Valentín?</h2>
+            <button class="btn-ans" onclick="finish()">OBVIO, LO ESTABA ESPERANDO</button>
+            <button class="btn-ans" onclick="finish()">SI! POR SUPUESTOOO</button>
         </section>
 
-        <section class="page final-bg" id="p5" style="justify-content: center; color: white;">
-            <h1 style="font-family: 'Playfair Display';">¡Confirmado Oficialmente!</h1>
-            <div class="lace-heart-container">
-                <p style="font-family: 'Dancing Script'; font-size: 28px; color: var(--pink-dark); margin: 0;">Eres mi San Valentín</p>
-                <div class="medallion-box">
+        <section class="page final-page" id="p5">
+            <h1 style="font-size: 24px; margin-bottom: 20px; letter-spacing: 1px;">Confirmado oficialmente:</h1>
+            <div class="doily-heart">
+                <p class="doily-text">Eres mi San Valentín.</p>
+                <div class="medallions">
                     <div class="medallion">L</div>
                     <div class="medallion">R</div>
                 </div>
             </div>
-            <p style="margin-top: 20px; font-size: 12px;">Prepárate para un día lleno de recuerdos.<br>Con amor, Luca.</p>
+            <p style="margin-top: 30px; font-size: 11px; line-height: 1.5; font-weight: 300;">
+                Gracias por decir que sí.<br>Prepárate para un día bonito,<br>Luca.
+            </p>
         </section>
 
     </div>
 
     <script>
-        function go(n) {
+        function nav(n) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('p' + n).classList.add('active');
         }
 
-        function startFinal() {
-            go(5);
-            setInterval(createHeart, 300);
+        function finish() {
+            nav(5);
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.innerHTML = ['❤️', '💖', '✨'][Math.floor(Math.random()*3)];
+                h.style.position = 'fixed';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.top = '-20px';
+                h.style.fontSize = Math.random() * 20 + 15 + 'px';
+                h.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 5000);
+            }, 300);
         }
 
-        function createHeart() {
-            const h = document.createElement('div');
-            h.innerHTML = ['❤️', '💖', '✨', '🌹'][Math.floor(Math.random()*4)];
-            h.style.position = 'fixed';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.top = '-20px';
-            h.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            h.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 5000);
-        }
-
-        const style = document.createElement('style');
-        style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }`;
-        document.head.appendChild(style);
+        const s = document.createElement('style');
+        s.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }`;
+        document.head.appendChild(s);
     </script>
 </body>
 </html>
