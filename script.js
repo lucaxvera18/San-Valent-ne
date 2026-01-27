@@ -1,40 +1,45 @@
-function nextPage(pageId) {
-    // Buscamos todas las páginas y quitamos la clase activa
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => {
+function nextPage(pageNum) {
+    // Oculta todas las páginas
+    document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-
-    // Mostramos la página que queremos
-    document.getElementById('p' + pageId).classList.add('active');
+    // Muestra la página solicitada
+    document.getElementById('p' + pageNum).classList.add('active');
 }
 
 function celebrate() {
-    // Ir a la página final
+    // Ir a la página final de confirmación
     nextPage(5);
-
-    // Iniciar lluvia de corazones
-    setInterval(createHeart, 250);
+    
+    // Crear lluvia de corazones constante
+    setInterval(createHeart, 300);
 }
 
 function createHeart() {
     const heart = document.createElement('div');
-    heart.classList.add('heart');
+    heart.innerHTML = '❤️';
+    heart.classList.add('floating-heart');
     
-    // Variedad de corazones
-    const types = ['❤️', '💖', '💘', '💕', '🌸'];
-    heart.innerHTML = types[Math.floor(Math.random() * types.length)];
-    
-    // Posición aleatoria
+    heart.style.position = 'fixed';
     heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = '-20px';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    heart.style.zIndex = '9999';
     
-    // Velocidad aleatoria entre 3 y 5 segundos
-    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+    // Animación de caída
+    const duration = Math.random() * 3 + 2;
+    heart.style.transition = `transform ${duration}s linear, opacity ${duration}s`;
     
     document.body.appendChild(heart);
 
-    // Eliminar el corazón cuando termine de caer para no saturar la memoria
+    // Animamos con un timeout pequeño para que el navegador registre el cambio
+    setTimeout(() => {
+        heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+        heart.style.opacity = '0';
+    }, 100);
+
+    // Limpiamos el corazón después de que caiga
     setTimeout(() => {
         heart.remove();
-    }, 5000);
+    }, duration * 1000);
 }
