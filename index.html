@@ -17,48 +17,90 @@
 
         .magazine-canvas { background-color: var(--pink-bg); width: 100%; max-width: 400px; height: 100vh; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; border: 1px solid #f8bbd0; }
 
-        .page { display: none; padding: 20px; height: 100%; flex-direction: column; box-sizing: border-box; text-align: center; color: var(--pink-dark); background: var(--pink-bg); overflow: hidden; }
+        .page { display: none; padding: 20px; height: 100%; flex-direction: column; box-sizing: border-box; text-align: center; color: var(--pink-dark); background: var(--pink-bg); overflow: hidden; position: relative; }
         .active { display: flex; animation: fadeIn 0.6s ease-in-out; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- P1: SOBRE CORREGIDO --- */
-        .envelope-container { position: relative; width: 300px; height: 200px; margin: auto; cursor: pointer; }
-        .envelope-back { position: absolute; bottom: 0; width: 300px; height: 150px; background: #ffc1d1; border-radius: 5px; z-index: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .paper-letter { position: absolute; bottom: 10px; left: 15px; width: 270px; height: 160px; background: white; z-index: 2; transition: transform 0.6s ease; padding: 20px; box-sizing: border-box; font-family: 'Dancing Script', cursive; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .envelope-front { position: absolute; bottom: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 100px solid #ffb1c1; z-index: 4; }
-        .envelope-flap { position: absolute; top: 50px; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 100px solid #ffb1c1; z-index: 5; transform-origin: top; transition: transform 0.6s ease; }
-        
-        .envelope-container:hover .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-container:hover .paper-letter { transform: translateY(-80px); z-index: 3; }
+        /* --- P1: SOBRE CORREGIDO (Capas Reales) --- */
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: auto;
+            cursor: pointer;
+            background: #ffc1d1; /* Parte de atrás del sobre */
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0; width: 0; height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #ffb1c1;
+            z-index: 4;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .paper-letter {
+            position: absolute;
+            top: 10px; left: 15px;
+            width: 270px; height: 170px;
+            background: white;
+            z-index: 2;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Dancing Script', cursive;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0; width: 0; height: 0;
+            border-left: 150px solid #ffd1dc;
+            border-right: 150px solid #ffd1dc;
+            border-bottom: 110px solid #ffc1d1;
+            z-index: 3;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .envelope-wrapper:hover .flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper:hover .paper-letter { transform: translateY(-100px); }
 
         /* --- P2: REVISTA --- */
         .mag-header { border-top: 1.5px solid var(--pink-dark); border-bottom: 1.5px solid var(--pink-dark); display: flex; justify-content: space-between; font-size: 8px; font-weight: bold; padding: 4px 0; margin-bottom: 10px; }
         .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 42px; margin: 5px 0; }
         .cursive-title { font-family: 'Dancing Script', cursive; font-size: 32px; margin: 10px 0; }
         .main-photo { width: 100%; border: 1px solid var(--pink-dark); padding: 5px; box-sizing: border-box; margin: 10px 0; }
-        .main-photo img { width: 100%; height: 180px; object-fit: cover; }
+        .main-photo img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--pink-dark); }
         
         .coupon { background: var(--red-main); color: white; padding: 10px; font-size: 8px; border: 1px dashed white; border-radius: 4px; animation: blink 1.5s infinite; flex: 1; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        /* --- P3: CUADRICULADO ARGENTINIZADO --- */
-        .reason-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; grid-template-rows: repeat(3, 110px); border: 1.5px solid var(--pink-dark); margin: 15px 0; background-color: white; }
-        .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 10px; font-size: 11px; font-weight: 600; line-height: 1.2; }
-        .cell-heart { font-size: 40px; color: var(--red-main); }
+        /* --- P3: CUADRICULADO ARGENTINO --- */
+        .reason-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, 110px); border: 1.5px solid var(--pink-dark); margin: 15px 0; background-color: white; }
+        .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: 600; }
+        .cell-heart { font-size: 35px; color: var(--red-main); }
 
-        /* --- P4: PREGUNTA CON PLUMAS --- */
-        #p4 { position: relative; }
-        .feather { position: absolute; color: #ffc1d1; font-size: 20px; pointer-events: none; z-index: 0; animation: fall-feather linear forwards; }
-        @keyframes fall-feather { to { transform: translateY(100vh) translateX(50px) rotate(360deg); opacity: 0; } }
+        /* --- PLUMAS --- */
+        .feather { position: absolute; top: -50px; color: #ffc1d1; font-size: 25px; pointer-events: none; animation: fall-feather linear forwards; z-index: 0; }
+        @keyframes fall-feather { to { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; } }
 
         /* --- P5: CORAZÓN ENCAJE --- */
         .final-page { background: var(--red-main); color: white; justify-content: center; }
-        .doily-heart { width: 320px; height: 300px; background-color: white; margin: auto; position: relative; clip-path: path('M160 280 C160 280 20 200 20 110 C20 40 90 20 160 100 C230 20 300 40 300 110 C300 200 160 280 160 280'); display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); }
+        .doily-heart { 
+            width: 320px; height: 300px; background-color: white; margin: auto; position: relative; 
+            clip-path: path('M160 280 C160 280 20 200 20 110 C20 40 90 20 160 100 C230 20 300 40 300 110 C300 200 160 280 160 280'); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); 
+        }
         .doily-heart::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 4px dotted var(--pink-medium); clip-path: inherit; }
         .medallion { width: 55px; height: 55px; background: linear-gradient(145deg, #ffd700, #d4af37); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--red-main); font-weight: 900; font-size: 22px; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
-        .btn-p { background: white; border: 1px solid var(--pink-dark); padding: 8px 15px; font-size: 10px; font-weight: bold; cursor: pointer; }
+        .btn-p { background: white; border: 1px solid var(--pink-dark); padding: 8px 15px; font-size: 10px; font-weight: bold; cursor: pointer; border-radius: 4px; }
         .btn-ans { background: white; border: 2px solid var(--pink-dark); padding: 15px; border-radius: 30px; width: 85%; margin: 10px auto; font-weight: bold; color: var(--pink-dark); cursor: pointer; z-index: 10; position: relative; }
     </style>
 </head>
@@ -67,14 +109,14 @@
     <div class="magazine-canvas">
         
         <section class="page active" id="p1" style="justify-content: center;">
-            <div class="envelope-container" onclick="nav(2)">
-                <div class="envelope-flap"></div>
+            <div class="envelope-wrapper" onclick="nav(2)">
+                <div class="flap"></div>
                 <div class="paper-letter">
                     <p style="margin: 0; font-size: 18px;">Para: Rosario</p>
                     <p style="font-size: 13px; margin-top: 10px;">Tengo una sorpresa para vos... <br> Click para ver ❤️</p>
+                    <p style="font-size: 10px; margin-top: 25px; text-align: right;">De: Luca</p>
                 </div>
-                <div class="envelope-back"></div>
-                <div class="envelope-front"></div>
+                <div class="pocket"></div>
             </div>
         </section>
 
@@ -104,7 +146,7 @@
                 <div class="cell cell-heart">❤️</div>
                 <div class="cell"><strong>3</strong> Con vos, cualquier día se siente especial.</div>
                 <div class="cell cell-heart">❤️</div>
-                <div class="cell"><strong>2</strong> Haces que mi corazón lata más rápido.</div>
+                <div class="cell"><strong>2</strong> Hacés que mi corazón lata más rápido.</div>
                 <div class="cell cell-heart">❤️</div>
                 <div class="cell"><strong>4</strong> Sos mi persona favorita para compartir.</div>
                 <div class="cell cell-heart">❤️</div>
@@ -118,7 +160,7 @@
         </section>
 
         <section class="page" id="p4" style="justify-content: center;">
-            <div id="feather-container"></div>
+            <div id="feather-container" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
             <h1 style="font-family: 'Playfair Display'; font-size: 26px; z-index: 1;">La gran pregunta</h1>
             <p style="font-size: 13px; margin: 15px 0; z-index: 1;">Después de analizar los hechos y comprobar la química innegable entre nosotros...</p>
             <h2 class="cursive-title" style="font-size: 40px; z-index: 1;">¿Querés ser mi San Valentín?</h2>
@@ -149,6 +191,7 @@
 
         function startFeathers() {
             const container = document.getElementById('feather-container');
+            container.innerHTML = '';
             setInterval(() => {
                 const f = document.createElement('div');
                 f.innerHTML = '🪶';
