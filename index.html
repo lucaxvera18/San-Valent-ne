@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Rosario ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,900&family=Montserrat:wght@300;400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,900;1,700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-bg: #fff0f3;
-            --pink-medium: #ff85a1;
-            --pink-dark: #a4133c;
-            --red-main: #c9184a;
+            --pink-bg: #fff5f7;
+            --pink-accent: #ffb3c1;
+            --pink-dark: #800f2f;
+            --red-love: #c9184a;
+            --gold-subtle: #d4af37;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body { 
-            background-color: #f8bbd0; 
+            background: radial-gradient(circle, #fbdae1 0%, #f8bbd0 100%);
             margin: 0; display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; font-family: 'Montserrat', sans-serif; overflow: hidden; 
         }
@@ -24,64 +25,72 @@
         .magazine-canvas { 
             background-color: var(--pink-bg); 
             width: 100vw; max-width: 400px; height: 92vh; position: relative; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: flex; flex-direction: column;
-            border-radius: 12px; border: 4px solid white;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+            border-radius: 15px; border: 6px solid white;
         }
 
-        .page { display: none; padding: 25px; height: 100%; flex-direction: column; text-align: center; position: relative; }
-        .active { display: flex; animation: fadeIn 0.5s ease-in; }
+        .page { display: none; padding: 30px; height: 100%; flex-direction: column; text-align: center; position: relative; }
+        .active { display: flex; animation: slideIn 0.5s ease-out; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* --- P1: SOBRE CORREGIDO --- */
-        .envelope-container { position: relative; width: 280px; height: 190px; margin: auto; cursor: pointer; perspective: 1000px; }
-        .envelope-back { position: absolute; bottom: 0; width: 100%; height: 150px; background: #ffb3c1; border-radius: 8px; z-index: 1; }
+        /* --- SOBRE MEJORADO --- */
+        .envelope-container { position: relative; width: 280px; height: 180px; margin: auto; cursor: pointer; perspective: 1000px; }
+        .envelope-back { position: absolute; bottom: 0; width: 100%; height: 140px; background: var(--pink-accent); border-radius: 8px; z-index: 1; box-shadow: inset 0 -5px 10px rgba(0,0,0,0.05); }
         .paper-letter { 
-            position: absolute; bottom: 10px; left: 10px; width: 260px; height: 150px; 
-            background: white; z-index: 2; transition: transform 0.8s ease-in-out; 
-            padding: 20px; font-family: 'Dancing Script', cursive; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: absolute; bottom: 5px; left: 10px; width: 260px; height: 140px; 
+            background: white; z-index: 2; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding: 20px; font-family: 'Dancing Script', cursive; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .envelope-front { position: absolute; bottom: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 100px solid #ff85a1; z-index: 4; }
-        .envelope-flap { 
-            position: absolute; top: 40px; width: 0; height: 0; 
-            border-left: 140px solid transparent; border-right: 140px solid transparent; 
-            border-top: 100px solid #ff85a1; z-index: 5; transform-origin: top; 
-            transition: transform 0.6s, z-index 0.6s; 
-        }
-
+        .envelope-flap { position: absolute; top: 40px; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ff85a1; z-index: 5; transform-origin: top; transition: transform 0.6s, z-index 0.6s; }
+        
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-container.open .paper-letter { transform: translateY(-120px); z-index: 3; }
+        .envelope-container.open .paper-letter { transform: translateY(-125px); z-index: 3; }
 
-        /* --- P2: REVISTA --- */
-        .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 44px; margin: 10px 0; color: var(--pink-dark); }
-        .main-photo { width: 100%; height: 180px; border: 1px solid var(--pink-dark); padding: 5px; margin: 10px 0; background: white; }
+        /* --- ESTILO REVISTA PREMIUM --- */
+        .v-header { font-family: 'Montserrat'; font-weight: 800; font-size: 10px; letter-spacing: 4px; color: var(--pink-dark); margin-bottom: 5px; border-bottom: 1px solid var(--pink-accent); display: inline-block; padding-bottom: 5px; }
+        .v-edition { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 38px; margin: 5px 0; color: var(--pink-dark); line-height: 1; }
+        
+        .main-photo { width: 100%; height: 210px; border: 1px solid #ddd; padding: 8px; margin: 15px 0; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .main-photo img { width: 100%; height: 100%; object-fit: cover; }
         
-        .coupon-container { display: flex; gap: 10px; margin: 15px 0; justify-content: center; }
+        /* CUPONES ESTILO TICKET */
+        .coupon-container { display: flex; gap: 10px; margin: 10px 0; }
         .coupon { 
-            background: var(--red-main); color: white; padding: 10px; font-size: 9px; 
-            border: 1px dashed white; border-radius: 4px; flex: 1; font-weight: bold;
+            background: white; color: var(--red-love); padding: 12px 5px; font-size: 10px; 
+            border: 2px dashed var(--pink-medium); border-radius: 10px; flex: 1; font-weight: 700;
+            box-shadow: 2px 4px 0px var(--pink-accent);
         }
 
-        /* --- P3: CUADRICULADO --- */
+        /* --- CUADRICULADO ELEGANTE --- */
         .reason-grid { 
-            display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, 90px); 
-            border: 2px solid var(--pink-dark); margin: 15px 0; background: white;
+            display: grid; grid-template-columns: 1fr 1fr 1fr; border: 2px solid var(--pink-dark); 
+            margin: 15px 0; background: white; box-shadow: 8px 8px 0 var(--pink-accent);
         }
-        .cell { border: 0.5px solid #fce4ec; display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: bold; color: var(--pink-dark); }
-        .cell-heart { font-size: 30px; color: var(--red-main); }
+        .cell { border: 0.5px solid #fff0f3; height: 90px; display: flex; align-items: center; justify-content: center; padding: 10px; font-size: 10px; font-weight: 600; color: #444; }
+        .cell-heart { font-size: 28px; color: var(--red-love); text-shadow: 0 0 10px rgba(201, 24, 74, 0.2); }
 
-        /* --- BOTONES AJUSTADOS --- */
-        .btn-p { background: var(--pink-dark); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; margin: 10px auto; width: fit-content; align-self: center; }
-        .btn-ans { background: var(--red-main); color: white; border: none; padding: 14px; border-radius: 25px; width: 85%; margin: 6px auto; font-weight: bold; cursor: pointer; font-size: 13px; }
+        /* --- BOTONES MINIMALISTAS --- */
+        .btn-nav { 
+            background: var(--pink-dark); color: white; border: none; 
+            padding: 12px 30px; border-radius: 30px; font-size: 11px; 
+            font-weight: 600; letter-spacing: 1px; cursor: pointer; 
+            margin: 15px auto 0; transition: transform 0.2s;
+        }
+        .btn-ans { 
+            background: var(--red-love); color: white; border: none; 
+            padding: 16px; border-radius: 50px; width: 90%; margin: 8px auto; 
+            font-weight: 700; font-size: 13px; cursor: pointer; box-shadow: 0 5px 15px rgba(201, 24, 74, 0.3);
+        }
 
         /* --- FINAL --- */
-        .doily-heart { 
-            width: 280px; height: 260px; background-color: white; margin: auto; position: relative; 
+        .final-heart-box { 
+            width: 280px; height: 260px; background: white; margin: auto; 
             clip-path: path('M140 240 C140 240 20 170 20 90 C20 40 80 20 140 85 C200 20 260 40 260 90 C260 170 140 240 140 240'); 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .initials { display: flex; gap: 15px; font-family: 'Playfair Display', serif; font-size: 35px; font-weight: 900; margin-top: 10px; }
+        .initials-text { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--pink-dark); font-weight: 900; }
     </style>
 </head>
 <body>
@@ -92,37 +101,37 @@
             <div class="envelope-container" id="envelope" onclick="openEnvelope()">
                 <div class="envelope-flap"></div>
                 <div class="paper-letter">
-                    <p style="margin: 0; font-size: 22px;">Para: Rosario</p>
-                    <p style="font-size: 14px; margin-top: 15px;">Tengo algo especial para vos...</p>
-                    <p style="font-size: 11px; margin-top: 25px; text-align: right;">Luca</p>
+                    <p style="margin: 0; font-size: 20px; color: var(--pink-dark);">Para: Rosario</p>
+                    <p style="font-size: 14px; margin-top: 15px; color: #666;">Preparé algo especial para vos...</p>
+                    <p style="font-size: 12px; margin-top: 20px; text-align: right; color: var(--pink-dark);">Luca</p>
                 </div>
                 <div class="envelope-back"></div>
                 <div class="envelope-front"></div>
             </div>
-            <p id="hint" style="font-size: 11px; margin-top: 40px; color: var(--pink-dark); font-weight: bold;">TOCÁ EL SOBRE</p>
+            <p id="hint" style="font-size: 10px; margin-top: 40px; color: var(--pink-dark); font-weight: 800; letter-spacing: 2px;">TOCÁ EL SOBRE PARA ABRIR</p>
         </section>
 
         <section class="page" id="p2">
-            <h1 class="v-edition">Valentine Edition</h1>
-            <h2 style="font-family: 'Dancing Script'; font-size: 26px; color: var(--red-main); margin-bottom: 5px;">Will you be my Valentine?</h2>
+            <span class="v-header">LUCA'S SPECIAL SELECTION</span>
+            <h1 class="v-edition">Valentine<br>Edition</h1>
             
             <div class="main-photo">
-                <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x300?text=Tu+Foto+Aqui'}">
+                <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x350?text=Tu+Foto+Aqui'}">
             </div>
 
             <div class="coupon-container">
-                <div class="coupon">CUPÓN PARA:<br>Noche de chicas</div>
-                <div class="coupon">CUPÓN PARA:<br>Noche de pelis</div>
+                <div class="coupon">VALE POR:<br>Noche de chicas</div>
+                <div class="coupon">VALE POR:<br>Noche de pelis</div>
             </div>
 
-            <p style="font-size: 11px; line-height: 1.4; color: #555; text-align: justify; margin: 0 5px;">
-                <strong>EDICIÓN ESPECIAL.</strong> En un mundo de millones de personas, mi elección siempre serás vos. Esta edición está dedicada a la sonrisa que ilumina mis días.
+            <p style="font-size: 11px; line-height: 1.6; color: #555; font-weight: 400; padding: 0 10px;">
+                Porque una edición no alcanza para describir lo increíble que sos. Sos mi persona favorita hoy y siempre.
             </p>
-            <button class="btn-p" onclick="nav(2)">SIGUIENTE ➔</button>
+            <button class="btn-nav" onclick="nav(2)">DESCUBRIR ➔</button>
         </section>
 
         <section class="page" id="p3">
-            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 18px;">Razones por las que sos Única</h2>
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 22px; color: var(--pink-dark);">Why You're Perfect</h2>
             <div class="reason-grid">
                 <div class="cell">Tu sonrisa ilumina todo.</div>
                 <div class="cell cell-heart">❤</div>
@@ -130,36 +139,35 @@
                 <div class="cell cell-heart">❤</div>
                 <div class="cell">Me encanta hablar con vos.</div>
                 <div class="cell cell-heart">❤</div>
-                <div class="cell">Sos mi persona favorita.</div>
+                <div class="cell">Sos mi lugar seguro.</div>
                 <div class="cell cell-heart">❤</div>
-                <div class="cell">Simplemente me hacés bien.</div>
+                <div class="cell">Me hacés muy bien.</div>
             </div>
-            <button class="btn-p" onclick="nav(3)">CONTINUAR ➔</button>
+            <button class="btn-nav" onclick="nav(3)">CONTINUAR ➔</button>
         </section>
 
         <section class="page" id="p4" style="justify-content: center;">
             <div id="petal-container" style="position: absolute; inset: 0; pointer-events: none;"></div>
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 36px; color: var(--red-main);">¿Querés ser mi San Valentín?</h2>
+            <p style="font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #999;">THE MOMENT</p>
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; color: var(--red-love); margin: 20px 0;">¿Querés ser mi San Valentín?</h2>
             <button class="btn-ans" onclick="finish()">¡SÍ, OBVIO! ❤️</button>
             <button class="btn-ans" onclick="finish()">CLARO QUE SÍ ❤️</button>
         </section>
 
-        <section class="page final-page" id="p5" style="justify-content: center; background: var(--red-main); color: white;">
-            <h1 style="font-size: 20px; margin-bottom: 20px; letter-spacing: 2px;">ES OFICIAL</h1>
-            <div class="doily-heart">
-                <p style="font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0;">Rosario & Luca</p>
-                <div class="initials">
-                    <span>L</span><span>&</span><span>R</span>
-                </div>
+        <section class="page" id="p5" style="justify-content: center; background: var(--red-love); color: white;">
+            <h1 style="font-size: 18px; letter-spacing: 4px; font-weight: 800; margin-bottom: 20px;">ES OFICIAL</h1>
+            <div class="final-heart-box">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 30px; margin: 0; color: var(--pink-dark);">Rosario & Luca</p>
+                <div class="initials-text">L & R</div>
             </div>
-            <p style="margin-top: 30px; font-size: 13px; font-weight: bold;">Te quiero muchísimo. ❤️</p>
+            <p style="margin-top: 30px; font-size: 14px; font-weight: 600; letter-spacing: 1px;">Te quiero muchísimo. ❤️</p>
         </section>
     </div>
 
     <script>
         function openEnvelope() {
             document.getElementById('envelope').classList.add('open');
-            setTimeout(() => { nav(1); }, 2200);
+            setTimeout(() => { nav(1); }, 2000);
         }
         function nav(n) {
             const pages = ['p1', 'p2', 'p3', 'p4', 'p5'];
