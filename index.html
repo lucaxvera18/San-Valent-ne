@@ -7,85 +7,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,900&family=Montserrat:wght@300;400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fff9fa;
-            --accent-color: #8e1a2d; /* Rojo elegante, no chillón */
-            --gold-soft: #c5a059;
-            --pink-soft: #f4dada;
+            --pink-bg: #fff0f3;
+            --pink-medium: #ff85a1;
+            --pink-dark: #a4133c;
+            --red-main: #c9184a;
+            --white-paper: #ffffff;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body { 
-            background: #1a1a1a; /* Fondo oscuro para resaltar la revista */
+            background-color: #f8bbd0; 
             margin: 0; display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; font-family: 'Montserrat', sans-serif; overflow: hidden; 
         }
 
-        /* Efecto de sombra de revista real */
         .magazine-canvas { 
-            background: var(--bg-color);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            width: 100vw; max-width: 400px; height: 95vh; position: relative; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column;
-            border-left: 2px solid rgba(0,0,0,0.1);
+            background-color: var(--pink-bg); 
+            width: 100vw; max-width: 400px; height: 92vh; position: relative; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+            border-radius: 12px; border: 4px solid white;
         }
 
-        .page { display: none; padding: 30px; height: 100%; flex-direction: column; text-align: center; position: relative; }
-        .active { display: flex; animation: slideUp 0.6s ease-out; }
+        .page { display: none; padding: 25px; height: 100%; flex-direction: column; text-align: center; position: relative; overflow-y: auto; }
+        .active { display: flex; animation: fadeIn 0.5s ease-in; }
 
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- SOBRE ELEGANTE --- */
-        .envelope-container { position: relative; width: 280px; height: 180px; margin: auto; cursor: pointer; }
-        .envelope-back { position: absolute; bottom: 0; width: 100%; height: 140px; background: #e0b1b1; border-radius: 4px; z-index: 1; }
+        /* --- P1: SOBRE --- */
+        .envelope-container { position: relative; width: 280px; height: 190px; margin: auto; cursor: pointer; }
+        .envelope-back { position: absolute; bottom: 0; width: 100%; height: 150px; background: #ffb3c1; border-radius: 8px; z-index: 1; }
         .paper-letter { 
-            position: absolute; bottom: 5px; left: 10px; width: 260px; height: 140px; 
-            background: white; z-index: 2; transition: transform 0.8s ease; 
+            position: absolute; bottom: 10px; left: 10px; width: 260px; height: 150px; 
+            background: white; z-index: 2; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             padding: 20px; font-family: 'Dancing Script', cursive; box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .envelope-front { position: absolute; bottom: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 90px solid #d49a9a; z-index: 4; }
-        .envelope-flap { position: absolute; top: 40px; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #d49a9a; z-index: 5; transform-origin: top; transition: transform 0.6s; }
-        .wax-seal { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 45px; height: 45px; background: var(--accent-color); border-radius: 50%; z-index: 6; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; border: 1px solid #63121f; }
+        .envelope-front { position: absolute; bottom: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 100px solid #ff85a1; z-index: 4; }
+        .envelope-flap { position: absolute; top: 40px; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ff85a1; z-index: 5; transform-origin: top; transition: transform 0.6s; }
+        .wax-seal { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 45px; height: 45px; background: var(--red-main); border-radius: 50%; z-index: 6; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; color: white; border: 2px solid white; font-weight: bold; }
 
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); }
-        .envelope-container.open .paper-letter { transform: translateY(-120px); z-index: 3; }
+        .envelope-container.open .paper-letter { transform: translateY(-110px); z-index: 3; }
 
-        /* --- ESTILO REVISTA --- */
-        .mag-title { font-family: 'UnifrakturMaguntia', serif; font-size: 42px; color: #000; margin: 10px 0 0; letter-spacing: -1px; }
-        .mag-subtitle { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 3px; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 15px; }
+        /* --- P2: REVISTA (VALENTINE) --- */
+        .mag-header { border-top: 1.5px solid var(--pink-dark); border-bottom: 1.5px solid var(--pink-dark); display: flex; justify-content: space-between; font-size: 8px; font-weight: bold; padding: 4px 0; color: var(--pink-dark); }
+        .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 44px; margin: 10px 0; color: var(--pink-dark); }
+        .main-photo { width: 100%; height: 200px; border: 1px solid var(--pink-dark); padding: 6px; margin: 15px 0; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .main-photo img { width: 100%; height: 100%; object-fit: cover; border: 1px solid #eee; }
         
-        .photo-frame { 
-            width: 100%; height: 260px; background: white; padding: 12px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 20px;
-            border: 1px solid #eee;
+        /* --- P3: CUADRICULADO --- */
+        .reason-grid { 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, 100px); 
+            border: 2px solid var(--pink-dark); margin: 15px 0; background: white;
+            box-shadow: 6px 6px 0 var(--pink-medium);
         }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        .coupon-box { 
-            border: 1px solid #ddd; padding: 12px; margin-top: auto; 
-            background: #fff; font-size: 10px; font-weight: bold; color: var(--accent-color);
-        }
+        .cell { border: 0.5px solid #fce4ec; display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: bold; color: var(--pink-dark); }
+        .cell-heart { font-size: 30px; color: var(--red-main); animation: heartbeat 1.2s infinite; }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         /* --- BOTONES --- */
-        .btn-next { 
-            background: #000; color: #white; color: white; border: none; 
-            padding: 15px; width: 100%; margin-top: 20px; font-weight: bold; 
-            text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
-        }
-
-        /* --- PREGUNTA --- */
-        .question-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 32px; color: var(--accent-color); margin: 30px 0; }
-        .btn-choice { 
-            background: white; border: 2px solid #000; padding: 15px; 
-            width: 100%; margin: 10px 0; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-        .btn-choice:active { background: #000; color: white; }
+        .nav-btns { margin-top: auto; display: flex; gap: 10px; padding-bottom: 10px; }
+        .btn-p { background: var(--pink-dark); color: white; border: none; padding: 12px; border-radius: 25px; font-size: 10px; font-weight: bold; flex: 1; cursor: pointer; letter-spacing: 1px; }
+        .btn-ans { background: var(--red-main); color: white; border: none; padding: 16px; border-radius: 30px; width: 100%; margin: 8px 0; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
 
         /* --- FINAL --- */
-        .heart-final { width: 80px; height: 80px; background: var(--accent-color); display: inline-block; clip-path: path('M40 70 C40 70 5 45 5 25 C5 10 20 5 40 25 C60 5 75 10 75 25 C75 45 40 70 40 70'); margin: 20px 0; }
+        .doily-heart { 
+            width: 280px; height: 260px; background-color: white; margin: auto; position: relative; 
+            clip-path: path('M140 240 C140 240 20 170 20 90 C20 40 80 20 140 85 C200 20 260 40 260 90 C260 170 140 240 140 240'); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); 
+        }
     </style>
 </head>
 <body>
@@ -94,61 +84,75 @@
         
         <section class="page active" id="p1" style="justify-content: center;">
             <div class="envelope-container" id="envelope" onclick="openEnvelope()">
-                <div class="envelope-flap"><div class="wax-seal">R</div></div>
+                <div class="envelope-flap"><div class="wax-seal">❤</div></div>
                 <div class="paper-letter">
-                    <p style="margin: 0; font-size: 20px; color: #333;">Para: Rosario</p>
-                    <p style="font-size: 14px; margin-top: 15px; color: #666;">Preparé algo para vos... ❤️</p>
-                    <p style="font-size: 11px; margin-top: 20px; text-align: right;">De: Luca</p>
+                    <p style="margin: 0; font-size: 22px;">Para: Rosario</p>
+                    <p style="font-size: 14px; margin-top: 15px;">Tengo algo especial para vos...</p>
+                    <p style="font-size: 12px; margin-top: 25px; text-align: right;">Luca</p>
                 </div>
                 <div class="envelope-back"></div>
                 <div class="envelope-front"></div>
             </div>
-            <p style="font-size: 11px; margin-top: 40px; letter-spacing: 2px; color: #999;">TOCÁ EL SELLO PARA ABRIR</p>
+            <p style="font-size: 11px; margin-top: 40px; color: var(--pink-dark); font-weight: bold; letter-spacing: 2px;">TOCÁ EL SOBRE</p>
         </section>
 
         <section class="page" id="p2">
-            <p class="mag-subtitle">SPECIAL LOVE EDITION • 2026</p>
-            <h1 class="mag-title">Valentine Edition</h1>
-            <p style="font-family: 'Playfair Display'; font-style: italic; font-size: 14px; margin-top: 5px;">"La única musa de esta historia"</p>
+            <div class="mag-header"><span>SPECIAL EDITION</span><span>PARA: ROSARIO</span><span>2026</span></div>
+            <h1 class="v-edition">Valentine Edition</h1>
+            <div class="mag-header" style="border-style: solid;"><span>14 DE FEBRERO</span><span>ME GUSTÁS MUCHO</span><span>SIEMPRE JUNTOS</span></div>
             
-            <div class="photo-frame">
-                <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x500?text=Tu+Foto+Aqui'}">
+            <h2 style="font-family: 'Dancing Script'; font-size: 28px; color: var(--red-main); margin: 15px 0 5px;">Will you be my Valentine?</h2>
+            
+            <div class="main-photo">
+                <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x300?text=Tu+Foto+Aqui'}">
             </div>
 
-            <p style="font-size: 12px; line-height: 1.6; color: #444; padding: 0 10px;">
-                <strong>EDICIÓN EXCLUSIVA.</strong> Porque no hace falta un día especial para decirte que me encantás, pero hoy quería hacerlo oficial.
+            <p style="font-size: 11px; line-height: 1.5; color: #555; text-align: justify; margin: 0 5px;">
+                <strong>CRÓNICA DE AMOR.</strong> En esta edición especial de San Valentín, celebramos que la persona más linda del mundo lea esto. No hacen falta muchas palabras cuando sobran las ganas de estar con vos.
             </p>
 
-            <div class="coupon-box">VALE POR: UNA CENA Y MUCHOS BESOS</div>
-            <button class="btn-next" onclick="nav(2)">VER MÁS ➔</button>
+            <div class="nav-btns">
+                <button class="btn-p" onclick="nav(2)">SIGUIENTE ➔</button>
+            </div>
         </section>
 
         <section class="page" id="p3">
-            <h2 style="font-family: 'UnifrakturMaguntia', serif; font-size: 35px;">Reasons Why</h2>
-            <div style="text-align: left; margin-top: 20px; font-size: 13px; line-height: 2.5;">
-                • Tu sonrisa es lo primero que quiero ver.<br>
-                • Hacés que todo sea mucho más fácil.<br>
-                • Me encanta tu forma de ser.<br>
-                • Sos mi persona favorita en el mundo.<br>
-                • Simplemente, me hacés muy bien.
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 20px; color: var(--pink-dark);">5 Razones por las que sos Única</h2>
+            <div class="reason-grid">
+                <div class="cell">Tu sonrisa ilumina todo.</div>
+                <div class="cell cell-heart">❤</div>
+                <div class="cell">Hacés que todo sea divertido.</div>
+                <div class="cell cell-heart">❤</div>
+                <div class="cell">Me encanta hablar con vos.</div>
+                <div class="cell cell-heart">❤</div>
+                <div class="cell">Sos mi persona favorita.</div>
+                <div class="cell cell-heart">❤</div>
+                <div class="cell">Simplemente me hacés muy bien.</div>
             </div>
-            <button class="btn-next" onclick="nav(3)" style="margin-top: auto;">CONTINUAR ➔</button>
+            <div class="nav-btns">
+                <button class="btn-p" onclick="nav(1)" style="background: #ccc;">VOLVER</button>
+                <button class="btn-p" onclick="nav(3)">CONTINUAR ➔</button>
+            </div>
         </section>
 
         <section class="page" id="p4" style="justify-content: center;">
             <div id="petal-container" style="position: absolute; inset: 0; pointer-events: none;"></div>
-            <p style="font-weight: bold; letter-spacing: 3px; font-size: 10px;">THE FINAL QUESTION</p>
-            <h2 class="question-text">¿Querés ser mi San Valentín?</h2>
-            <button class="btn-choice" onclick="finish()">SÍ, POR SUPUESTO ❤️</button>
-            <button class="btn-choice" onclick="finish()">OBVIO QUE SÍ ❤️</button>
+            <h1 style="font-family: 'Playfair Display'; font-size: 26px; color: var(--pink-dark);">La Pregunta</h1>
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; color: var(--red-main); margin: 25px 0;">¿Querés ser mi San Valentín?</h2>
+            <button class="btn-ans" onclick="finish()">¡SÍ, OBVIO! ❤️</button>
+            <button class="btn-ans" onclick="finish()">CLARO QUE SÍ ❤️</button>
         </section>
 
-        <section class="page" id="p5" style="justify-content: center;">
-            <h1 style="font-family: 'UnifrakturMaguntia', serif; font-size: 40px; margin: 0;">Es oficial.</h1>
-            <div class="heart-final"></div>
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 30px; margin: 0;">Rosario & Luca</h2>
-            <p style="margin-top: 30px; font-size: 13px; letter-spacing: 1px; color: #666;">Te quiero muchísimo.</p>
-            <p style="font-size: 11px; color: #999;">Gracias por estar en mi vida.</p>
+        <section class="page" id="p5" style="justify-content: center; background: var(--red-main); color: white;">
+            <h1 style="font-size: 22px; margin-bottom: 20px;">ES OFICIAL</h1>
+            <div class="doily-heart">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0;">Rosario & Luca</p>
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <div style="width: 50px; height: 50px; background: var(--pink-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; font-weight: bold;">L</div>
+                    <div style="width: 50px; height: 50px; background: var(--pink-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; font-weight: bold;">R</div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 14px;">Te quiero muchísimo. ❤️</p>
         </section>
     </div>
 
@@ -171,10 +175,9 @@
                 p.style.position = 'absolute';
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.top = '-20px';
-                p.style.fontSize = '20px';
-                p.style.animation = `fall ${Math.random() * 3 + 3}s linear forwards`;
+                p.style.animation = `fall ${Math.random() * 2 + 3}s linear forwards`;
                 container.appendChild(p);
-                setTimeout(() => p.remove(), 6000);
+                setTimeout(() => p.remove(), 5000);
             }, 300);
         }
         function finish() {
@@ -190,9 +193,9 @@
                 setTimeout(() => h.remove(), 3000);
             }, 200);
         }
-        const style = document.createElement('style');
-        style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }`;
-        document.head.appendChild(style);
+        const s = document.createElement('style');
+        s.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }`;
+        document.head.appendChild(s);
     </script>
 </body>
 </html>
