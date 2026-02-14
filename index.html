@@ -52,7 +52,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- P1: SOBRE --- */
+        /* --- SOBRE (P1) --- */
         .envelope-container { 
             position: relative; 
             width: 280px; 
@@ -113,7 +113,7 @@
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .paper-letter { transform: translateY(-110px); z-index: 3; }
 
-        /* --- P2: REVISTA --- */
+        /* --- REVISTA (P2) --- */
         .mag-header { border-top: 1.5px solid var(--pink-dark); border-bottom: 1.5px solid var(--pink-dark); display: flex; justify-content: space-between; font-size: 8px; font-weight: bold; padding: 4px 0; margin-bottom: 10px; }
         .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 40px; margin: 5px 0; }
         .cursive-title { font-family: 'Dancing Script', cursive; font-size: 30px; margin: 10px 0; }
@@ -123,7 +123,7 @@
         .coupon { background: var(--red-main); color: white; padding: 10px; font-size: 8px; border: 1px dashed white; border-radius: 4px; animation: blink 1.5s infinite; flex: 1; display: flex; align-items: center; justify-content: center; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        /* --- P3: CUADRICULADO --- */
+        /* --- CUADRICULADO (P3) --- */
         .reason-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr 1fr; 
@@ -135,11 +135,10 @@
         .cell { border: 0.5px solid var(--pink-dark); display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: 600; line-height: 1.2; }
         .cell-heart { font-size: 30px; color: var(--red-main); }
 
-        /* --- PLUMAS --- */
         .feather { position: absolute; top: -50px; font-size: 25px; pointer-events: none; animation: fall-feather linear forwards; z-index: 0; }
         @keyframes fall-feather { to { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; } }
 
-        /* --- P5: FINAL --- */
+        /* --- FINAL (P5) --- */
         .final-page { background: var(--red-main); color: white; justify-content: center; }
         .doily-heart { 
             width: 300px; height: 280px; background-color: white; margin: auto; position: relative; 
@@ -177,7 +176,9 @@
             <h1 class="v-edition">Valentine Edition</h1>
             <div class="mag-header" style="border-style: solid;"><span>14 DE FEBRERO</span><span>ME GUSTÁS MUCHO</span><span>SIEMPRE JUNTOS</span></div>
             <h2 class="cursive-title">Will you be my Valentine?</h2>
-            <div class="main-photo"><img src="foto1.jpg"></div>
+            <div class="main-photo">
+                <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x180?text=Subi+foto1.jpg+a+GitHub'}">
+            </div>
             <div style="font-size: 11px; text-align: justify; line-height: 1.4; padding: 0 5px;">
                 <strong>Diario de amor.</strong> Después de que el mundo hiciera su magia y los caminos se cruzaran, me quedó claro algo: quiero vivir este 14 de febrero con vos.
             </div>
@@ -204,7 +205,6 @@
                 <div class="cell cell-heart">❤️</div>
                 <div class="cell"><strong>5</strong> No imagino a nadie más a mi lado.</div>
             </div>
-            <div style="background: var(--red-main); color: white; padding: 10px; font-size: 10px; font-weight: bold;">SEÑALES DE QUE DEBÉS DECIR "SÍ"</div>
             <div class="nav-btns">
                 <button class="btn-p" onclick="nav(2)">ANTERIOR</button>
                 <button class="btn-p" onclick="nav(4)">SIGUIENTE</button>
@@ -239,9 +239,7 @@
             if(!env.classList.contains('open')) {
                 env.classList.add('open');
                 document.getElementById('hint').innerText = "Abriendo sorpresa...";
-                setTimeout(() => {
-                    nav(2);
-                }, 1800); // Tiempo para que vea la carta subir antes de cambiar
+                setTimeout(() => { nav(2); }, 1800);
             }
         }
 
