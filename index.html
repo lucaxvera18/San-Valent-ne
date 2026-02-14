@@ -33,18 +33,15 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- P1: SOBRE (SOLAPA CORREGIDA) --- */
+        /* --- P1: SOBRE CORREGIDO --- */
         .envelope-container { position: relative; width: 280px; height: 190px; margin: auto; cursor: pointer; perspective: 1000px; }
         .envelope-back { position: absolute; bottom: 0; width: 100%; height: 150px; background: #ffb3c1; border-radius: 8px; z-index: 1; }
-        
         .paper-letter { 
             position: absolute; bottom: 10px; left: 10px; width: 260px; height: 150px; 
             background: white; z-index: 2; transition: transform 0.8s ease-in-out; 
             padding: 20px; font-family: 'Dancing Script', cursive; box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        
         .envelope-front { position: absolute; bottom: 0; width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 100px solid #ff85a1; z-index: 4; }
-        
         .envelope-flap { 
             position: absolute; top: 40px; width: 0; height: 0; 
             border-left: 140px solid transparent; border-right: 140px solid transparent; 
@@ -52,34 +49,39 @@
             transition: transform 0.6s, z-index 0.6s; 
         }
 
-        /* Cuando se abre, la solapa se va atrás del papel */
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .paper-letter { transform: translateY(-120px); z-index: 3; }
 
         /* --- P2: REVISTA --- */
         .v-edition { font-family: 'UnifrakturMaguntia', serif; font-size: 44px; margin: 10px 0; color: var(--pink-dark); }
-        .main-photo { width: 100%; height: 200px; border: 1px solid var(--pink-dark); padding: 6px; margin: 15px 0; background: white; }
+        .main-photo { width: 100%; height: 180px; border: 1px solid var(--pink-dark); padding: 5px; margin: 10px 0; background: white; }
         .main-photo img { width: 100%; height: 100%; object-fit: cover; }
         
+        .coupon-container { display: flex; gap: 10px; margin: 15px 0; justify-content: center; }
+        .coupon { 
+            background: var(--red-main); color: white; padding: 10px; font-size: 9px; 
+            border: 1px dashed white; border-radius: 4px; flex: 1; font-weight: bold;
+        }
+
         /* --- P3: CUADRICULADO --- */
         .reason-grid { 
-            display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, 100px); 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(3, 90px); 
             border: 2px solid var(--pink-dark); margin: 15px 0; background: white;
         }
         .cell { border: 0.5px solid #fce4ec; display: flex; align-items: center; justify-content: center; padding: 8px; font-size: 10px; font-weight: bold; color: var(--pink-dark); }
         .cell-heart { font-size: 30px; color: var(--red-main); }
 
-        /* --- BOTONES --- */
-        .btn-p { background: var(--pink-dark); color: white; border: none; padding: 12px; border-radius: 25px; font-size: 10px; font-weight: bold; flex: 1; cursor: pointer; margin-top: auto; }
-        .btn-ans { background: var(--red-main); color: white; border: none; padding: 16px; border-radius: 30px; width: 100%; margin: 8px 0; font-weight: bold; cursor: pointer; }
+        /* --- BOTONES AJUSTADOS --- */
+        .btn-p { background: var(--pink-dark); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; margin: 10px auto; width: fit-content; align-self: center; }
+        .btn-ans { background: var(--red-main); color: white; border: none; padding: 14px; border-radius: 25px; width: 85%; margin: 6px auto; font-weight: bold; cursor: pointer; font-size: 13px; }
 
-        /* --- FINAL (INICIALES LIMPIAS) --- */
+        /* --- FINAL --- */
         .doily-heart { 
             width: 280px; height: 260px; background-color: white; margin: auto; position: relative; 
             clip-path: path('M140 240 C140 240 20 170 20 90 C20 40 80 20 140 85 C200 20 260 40 260 90 C260 170 140 240 140 240'); 
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--pink-dark); 
         }
-        .initials-container { display: flex; gap: 20px; margin-top: 15px; font-size: 30px; font-weight: 900; font-family: 'Playfair Display', serif; }
+        .initials { display: flex; gap: 15px; font-family: 'Playfair Display', serif; font-size: 35px; font-weight: 900; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -92,7 +94,7 @@
                 <div class="paper-letter">
                     <p style="margin: 0; font-size: 22px;">Para: Rosario</p>
                     <p style="font-size: 14px; margin-top: 15px;">Tengo algo especial para vos...</p>
-                    <p style="font-size: 12px; margin-top: 25px; text-align: right;">Luca</p>
+                    <p style="font-size: 11px; margin-top: 25px; text-align: right;">Luca</p>
                 </div>
                 <div class="envelope-back"></div>
                 <div class="envelope-front"></div>
@@ -102,18 +104,25 @@
 
         <section class="page" id="p2">
             <h1 class="v-edition">Valentine Edition</h1>
-            <h2 style="font-family: 'Dancing Script'; font-size: 28px; color: var(--red-main); margin-bottom: 5px;">Will you be my Valentine?</h2>
+            <h2 style="font-family: 'Dancing Script'; font-size: 26px; color: var(--red-main); margin-bottom: 5px;">Will you be my Valentine?</h2>
+            
             <div class="main-photo">
                 <img src="foto1.jpg" onerror="this.src='foto1.JPG'; this.onerror=function(){this.src='https://via.placeholder.com/400x300?text=Tu+Foto+Aqui'}">
             </div>
-            <p style="font-size: 11px; line-height: 1.5; color: #555; text-align: justify;">
+
+            <div class="coupon-container">
+                <div class="coupon">CUPÓN PARA:<br>Noche de chicas</div>
+                <div class="coupon">CUPÓN PARA:<br>Noche de pelis</div>
+            </div>
+
+            <p style="font-size: 11px; line-height: 1.4; color: #555; text-align: justify; margin: 0 5px;">
                 <strong>EDICIÓN ESPECIAL.</strong> En un mundo de millones de personas, mi elección siempre serás vos. Esta edición está dedicada a la sonrisa que ilumina mis días.
             </p>
             <button class="btn-p" onclick="nav(2)">SIGUIENTE ➔</button>
         </section>
 
         <section class="page" id="p3">
-            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 20px;">Razones por las que sos Única</h2>
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; font-size: 18px;">Razones por las que sos Única</h2>
             <div class="reason-grid">
                 <div class="cell">Tu sonrisa ilumina todo.</div>
                 <div class="cell cell-heart">❤</div>
@@ -130,29 +139,26 @@
 
         <section class="page" id="p4" style="justify-content: center;">
             <div id="petal-container" style="position: absolute; inset: 0; pointer-events: none;"></div>
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; color: var(--red-main);">¿Querés ser mi San Valentín?</h2>
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 36px; color: var(--red-main);">¿Querés ser mi San Valentín?</h2>
             <button class="btn-ans" onclick="finish()">¡SÍ, OBVIO! ❤️</button>
             <button class="btn-ans" onclick="finish()">CLARO QUE SÍ ❤️</button>
         </section>
 
-        <section class="page" id="p5" style="justify-content: center; background: var(--red-main); color: white;">
-            <h1 style="font-size: 22px; margin-bottom: 20px;">ES OFICIAL</h1>
+        <section class="page final-page" id="p5" style="justify-content: center; background: var(--red-main); color: white;">
+            <h1 style="font-size: 20px; margin-bottom: 20px; letter-spacing: 2px;">ES OFICIAL</h1>
             <div class="doily-heart">
                 <p style="font-family: 'Dancing Script', cursive; font-size: 32px; margin: 0;">Rosario & Luca</p>
-                <div class="initials-container">
-                    <span>L</span>
-                    <span>&</span>
-                    <span>R</span>
+                <div class="initials">
+                    <span>L</span><span>&</span><span>R</span>
                 </div>
             </div>
-            <p style="margin-top: 30px; font-size: 14px;">Te quiero muchísimo. ❤️</p>
+            <p style="margin-top: 30px; font-size: 13px; font-weight: bold;">Te quiero muchísimo. ❤️</p>
         </section>
     </div>
 
     <script>
         function openEnvelope() {
             document.getElementById('envelope').classList.add('open');
-            document.getElementById('hint').style.opacity = '0';
             setTimeout(() => { nav(1); }, 2200);
         }
         function nav(n) {
@@ -165,8 +171,7 @@
             const container = document.getElementById('petal-container');
             setInterval(() => {
                 const p = document.createElement('div');
-                p.innerHTML = '🌸';
-                p.style.position = 'absolute';
+                p.innerHTML = '🌸'; p.style.position = 'absolute';
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.top = '-20px';
                 p.style.animation = `fall ${Math.random() * 2 + 3}s linear forwards`;
@@ -178,8 +183,7 @@
             nav(4);
             setInterval(() => {
                 const h = document.createElement('div');
-                h.innerHTML = '❤️';
-                h.style.position = 'fixed';
+                h.innerHTML = '❤️'; h.style.position = 'fixed';
                 h.style.left = Math.random() * 100 + 'vw';
                 h.style.top = '-20px';
                 h.style.animation = `fall 3s linear forwards`;
